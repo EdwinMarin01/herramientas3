@@ -25,6 +25,10 @@ datosPais = df.query("country == '"+pais+"'")
 fig = px.bar(datosPais, x='year', y='pop')
 st.plotly_chart(fig, use_container_width=True)
 
+age = st.slider('How old are you?', 0, 130, 25)
+st.write("I'm ", age, 'years old')
+
+
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     st.header("Hola desde Streamlit!")
