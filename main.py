@@ -7,7 +7,7 @@ import streamlit as st
 import plotly.express as px
 import pandas as pd
 import plotly.figure_factory as ff
-
+import accessAPI as servicio
 
 
 df = px.data.gapminder()
@@ -25,9 +25,15 @@ datosPais = df.query("country == '"+pais+"'")
 fig = px.bar(datosPais, x='year', y='pop')
 st.plotly_chart(fig, use_container_width=True)
 
-age = st.slider('How old are you?', 0, 130, 25)
-st.write("I'm ", age, 'years old')
+valor = st.slider('Elige el rango de años a analizar', 1950, 2010, 1990)
+st.write("Elegiste: ", valor)
 
+datosFiltrados=datosPais[datosPais['year'] == valor]
+st.dataframe(datosFiltrados)
+
+if st.button('LLamar servicio'):
+    result = servicio.llamarServicio()
+    st.write('Resultado =', result)
 
 def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
