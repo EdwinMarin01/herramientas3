@@ -56,6 +56,6 @@ if st.button('Predict'):
     result2 = json.loads(result.decode("utf-8"))
     resultado = result2["Results"][0]
     if resultado == "yes":
-        st.success("Apto a recibir credito bancario")
+        st.success("Apto para recibir credito bancario")
     else:
-        st.error("No apto a recibir credito bancario")
+        st.error("No apto para recibir credito bancario")
