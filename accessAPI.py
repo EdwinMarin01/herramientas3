@@ -8,7 +8,7 @@ def allowSelfSignedHttps(allowed):
     if allowed and not os.environ.get('PYTHONHTTPSVERIFY', '') and getattr(ssl, '_create_unverified_context', None):
         ssl._create_default_https_context = ssl._create_unverified_context
 
-def llamarServicio():
+def llamarServicio(age, job, marital, education, default, housing, loan, contact, month, day_of_week, duration, campaign, pdays, previous, poutcome, emp_var_rate, cons_price_idx, cons_conf_idx, euribor3m, nr_employed):
     allowSelfSignedHttps(True) # this line is needed if you use self-signed certificate in your scoring service.
 
     # Request data goes here
@@ -20,25 +20,26 @@ def llamarServicio():
       "Inputs": {
         "data": [
           {
-            "age": 25,
-            "job": "unknown",
-            "marital": "single",
-            "education": "high.school",
-            "default": "yes",
-            "housing": "yes",
-            "loan": "yes",
-            "contact": "cellular",
-            "month": "jan",
-            "duration": 4900,
-            "campaign": 50,
-            "pdays": 500,
-            "previous": 5,
-            "poutcome": "nonexistent",
-            "emp.var.rate": 1,
-            "cons.price.idx": 94,
-            "cons.conf.idx": -40,
-            "euribor3m": 2.5,
-            "nr.employed": 5001
+            "age": age,
+            "job": job,
+            "marital": marital,
+            "education": education,
+            "default": default,
+            "housing": housing,
+            "loan": loan,
+            "contact": contact,
+            "month": month,
+            "day_of_week": day_of_week,
+            "duration": duration,
+            "campaign": campaign,
+            "pdays": pdays,
+            "previous": previous,
+            "poutcome": poutcome,
+            "emp.var.rate": emp_var_rate,
+            "cons.price.idx": cons_price_idx,
+            "cons.conf.idx": cons_conf_idx,
+            "euribor3m": euribor3m,
+            "nr.employed": nr_employed
           }
         ]
       },
@@ -49,15 +50,15 @@ def llamarServicio():
 
     body = str.encode(json.dumps(data))
 
-    url = 'https://fca-regression.eastus2.inference.ml.azure.com/score'
+    url = 'https://herramientas3-ympuj.eastus2.inference.ml.azure.com/score'
     # Replace this with the primary/secondary key or AMLToken for the endpoint
-    api_key = 'AnVcIXbYyV9KbCKmAGmbV2gNhpMAdmXg'
+    api_key = 'Ed5GzJmOMReUKZTTKtGz0kB4GrQfvfKG'
     if not api_key:
         raise Exception("A key should be provided to invoke the endpoint")
 
     # The azureml-model-deployment header will force the request to go to a specific deployment.
     # Remove this header to have the request observe the endpoint traffic rules
-    headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key), 'azureml-model-deployment': 'fca-deploy2' }
+    headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key), 'azureml-model-deployment': 'automlba75a27c040-1' }
 
     req = urllib.request.Request(url, body, headers)
 
