@@ -26,6 +26,7 @@ listaPoutcome = df_banco['poutcome'].unique().tolist()
 
 
 st.title('Predicción de Créditos Bancarios')
+st.write('By Edwin Antonio Marín Manzanero')
 
 # Define the form fields
 age = st.slider('Age', 16, 100, 25)
