@@ -11,6 +11,7 @@ import accessAPI as servicio
 import json
 import pandas as pd
 
+
 data_path = 'data_set/data_banco.csv'
 df_banco = pd.read_csv(data_path)
 listaJob = df_banco['job'].unique().tolist()
@@ -60,3 +61,29 @@ if st.button('Predict'):
         st.success("Apto para recibir credito bancario")
     else:
         st.error("No apto para recibir credito bancario")
+
+model = pickle.load(open("/content/drive/MyDrive/model.pkl","rb"))
+data = {
+            "age": 25,
+            "job": "unknown",
+            "marital": "single",
+            "education": "high.school",
+            "default": "yes",
+            "housing": "yes",
+            "loan": "yes",
+            "contact": "cellular",
+            "month": "jan",
+            "day_of_week":"mon",
+            "duration": 4900,
+            "campaign": 50,
+            "pdays": 500,
+            "previous": 5,
+            "poutcome": "nonexistent",
+            "emp.var.rate": 1,
+            "cons.price.idx": 94,
+            "cons.conf.idx": -40,
+            "euribor3m": 2.5,
+            "nr.employed": 5001
+          }
+df = pd.json_normalize(data)
+st.write(model.predict(df))
